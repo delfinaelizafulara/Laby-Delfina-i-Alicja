@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+ 
+
+class Konto {
+
+public:
+
+    virtual double obliczOprocentowanie(double saldo) {
+
+        return 0.0; // domyślnie brak oprocentowania
+
+    }
+
+};
+
+ 
+
+class KontoOszczednosciowe : public Konto {
+
+public:
+
+    double obliczOprocentowanie(double saldo) override {
+
+        return saldo * 0.05; // 5%
+
+    }
+
+};
+
+ 
+
+class KontoPremium : public Konto {
+
+public:
+
+    double obliczOprocentowanie(double saldo) override {
+
+        return saldo * 0.08; // 8%
+
+    }
+
+};
+
+ 
+
+int main() {
+
+    Konto* k1 = new KontoOszczednosciowe();
+
+    Konto* k2 = new KontoPremium();
+
+ 
+
+    cout << k1->obliczOprocentowanie(1000) << endl; // 50
+
+    cout << k2->obliczOprocentowanie(1000) << endl; // 80
+
+ 
+
+    delete k1;
+
+    delete k2;
+
+}
